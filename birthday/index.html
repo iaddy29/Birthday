@@ -1,218 +1,235 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>HBD love </title>	    
-        <link type="text/css" rel="stylesheet" href="./file/default.css">
-		<script type="text/javascript" src="./file/jquery.min.js"></script>
-		<script type="text/javascript" src="./file/jscex.min.js"></script>
-		<script type="text/javascript" src="./file/jscex-parser.js"></script>
-		<script type="text/javascript" src="./file/jscex-jit.js"></script>
-		<script type="text/javascript" src="./file/jscex-builderbase.min.js"></script>
-		<script type="text/javascript" src="./file/jscex-async.min.js"></script>
-		<script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
-		<script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
-		<script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
-        <script>
-            function playAudio() {
-                var audio = document.getElementById("myAudio");
-                audio.play();
-            }
-        </script>
-	    <style type="text/css">
-        </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Rani 💖</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+    .floating { animation: float 4s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50%;
+      animation: rise 10s infinite ease-in;
+    }
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+    /* Falling hearts */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: red;
+      font-size: 24px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh); opacity: 0; }
+    }
+    /* Image popup modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.5s;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
+      animation: zoomIn 0.6s;
+      box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes zoomIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    /* Typewriter intro */
+    #intro {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: black;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      z-index: 100;
+    }
+    #intro p {
+      border-right: 2px solid pink;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  </style>
 </head>
-    <body>
-        <div id="main">
-            <div id="error">，<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>(<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
-            <audio autoplay="autoplay" height="100" width="100" id = "myAudio">
-                    <source src="aud.mp3" type="audio/mp3" />
-                    <embed height="100" width="100" src="aud.mp3" />
-            </audio>
-            <div id="wrap">
-                <div id="text">
-                    <div id="code">
-                      <span class="say"> Happiest Birthday  </span><br>
-                      <span class="say">My Beautiful🫀 </span><br>             
-                      <span class="say">I'LL GIVE YOU</span><br>
-                      <span class="say">ALL THE LOVE🥰</span><br>
-                      <span class="say">THAT ONE CAN💕</span><br>
-                      <span class="say">Your @techeonn🫶! </span><br>
-                      <span class="say"><span class="space"></span></span> </font>
-                          <br />
-                          <br />
-                      </p>
-                    </div>
-                  </div>
+<body class="text-center text-white">
 
-                  <div id = "message-box"></div>
-                <div id="clock-box">
-                    <span class="STYLE1"></span><font color="#33CC00"></font>
-<span class="STYLE1"></span>
-                  <div id="clock"></div>
-              </div>
-                <canvas id="canvas" width="1100" height="680"></canvas>
-            </div>
-            
-        </div>
+  <!-- Intro screen -->
+  <div id="intro">
+    <p id="typewriter"></p>
+  </div>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid" type="audio/midi">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+
+  <!-- Floating Balloons -->
+  <div class="balloon" style="left:10%; background:#ff6b81;"></div>
+  <div class="balloon" style="left:30%; background:#feca57;"></div>
+  <div class="balloon" style="left:50%; background:#48dbfb;"></div>
+  <div class="balloon" style="left:70%; background:#1dd1a1;"></div>
+  <div class="balloon" style="left:90%; background:#5f27cd;"></div>
+
+  <!-- Main Content -->
+  <div id="mainContent" class="relative z-10 p-6 hidden">
+    <h1 class="text-4xl md:text-6xl font-bold mt-10 animate-bounce">🎉 Happy Birthday Rani 🎂</h1>
+    <p class="mt-4 text-xl md:text-2xl italic animate-pulse">"You’re not getting older… you’re just getting more irresistible 💕"</p>
     
-    <script>
-    </script>
+    <!-- Cute Photos -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 px-4">
+      <img src="https://raw.githubusercontent.com/iaddy29/Birthday/main/birthday/file/IMG-20250812-WA0002.jpg" class="rounded-2xl shadow-xl cursor-pointer transition-transform hover:scale-110 floating" onclick="openModal(this.src)">
+      <img src="https://raw.githubusercontent.com/iaddy29/Birthday/main/birthday/file/IMG-20250812-WA0013.jpg" class="rounded-2xl shadow-xl cursor-pointer transition-transform hover:scale-110 floating" onclick="openModal(this.src)">
+      <img src="https://raw.githubusercontent.com/iaddy29/Birthday/main/birthday/file/IMG-20250812-WA0019.jpg" class="rounded-2xl shadow-xl cursor-pointer transition-transform hover:scale-110 floating" onclick="openModal(this.src)">
+      <img src="https://raw.githubusercontent.com/iaddy29/Birthday/main/birthday/file/IMG-20250812-WA0021.jpg" class="rounded-2xl shadow-xl cursor-pointer transition-transform hover:scale-110 floating" onclick="openModal(this.src)">
+      <img src="https://raw.githubusercontent.com/iaddy29/Birthday/main/birthday/file/IMG-20250812-WA0035.jpg" class="rounded-2xl shadow-xl cursor-pointer transition-transform hover:scale-110 floating" onclick="openModal(this.src)">
+      <img src="https://raw.githubusercontent.com/iaddy29/Birthday/main/birthday/file/IMG-20250812-WA0039.jpg" class="rounded-2xl shadow-xl cursor-pointer transition-transform hover:scale-110 floating" onclick="openModal(this.src)">
+    </div>
 
-    <script>
-    (function(){
-        var canvas = $('#canvas');
-		
-        if (!canvas[0].getContext) {
-            $("#error").show();
-            return false;        }
+    <!-- Flirty Lines -->
+    <div class="mt-10 text-lg md:text-2xl font-semibold space-y-2 animate-fadeIn">
+      <p>✨ Rani, you shine brighter than all the candles on your cake.</p>
+      <p>💖 If beauty had a birthday, it would be today – because YOU were born.</p>
+      <p>😉 Honestly, the only gift missing is me… wrapped in your arms.</p>
+    </div>
 
-        var width = canvas.width();
-        var height = canvas.height();        
-        canvas.attr("width", width);
-        canvas.attr("height", height);
-        var opts = {
-            seed: {
-                x: width / 2 - 20,
-                color: "rgb(190, 26, 37)",
-                scale: 2
-            },
-            branch: [
-                [535, 680, 570, 250, 500, 200, 30, 100, [
-                    [540, 500, 455, 417, 340, 400, 13, 100, [
-                        [450, 435, 434, 430, 394, 395, 2, 40]
-                    ]],
-                    [550, 445, 600, 356, 680, 345, 12, 100, [
-                        [578, 400, 648, 409, 661, 426, 3, 80]
-                    ]],
-                    [539, 281, 537, 248, 534, 217, 3, 40],
-                    [546, 397, 413, 247, 328, 244, 9, 80, [
-                        [427, 286, 383, 253, 371, 205, 2, 40],
-                        [498, 345, 435, 315, 395, 330, 4, 60]
-                    ]],
-                    [546, 357, 608, 252, 678, 221, 6, 100, [
-                        [590, 293, 646, 277, 648, 271, 2, 80]
-                    ]]
-                ]] 
-            ],
-            bloom: {
-                num: 700,
-                width: 1080,
-                height: 650,
-            },
-            footer: {
-                width: 1200,
-                height: 5,
-                speed: 10,
-            }
+    <!-- Button -->
+    <button 
+      onclick="celebrate()" 
+      class="mt-8 px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-full shadow-lg text-white text-lg transition-transform hover:scale-110">
+      🎁 Open Your Surprise
+    </button>
+  </div>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="modal" onclick="closeModal()">
+    <img id="modalImg" src="">
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Falling hearts
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 500);
+
+    // Modal functions
+    function openModal(src) {
+      document.getElementById("modalImg").src = src;
+      document.getElementById("imageModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+
+    // Typewriter intro
+    const messages = [
+      "Hey Rani... 💕",
+      "Guess what day it is? 🎉",
+      "That’s right... YOUR special day! 🎂",
+      "Let’s celebrate 🥳"
+    ];
+    let i = 0, j = 0;
+    const speed = 80;
+    const typewriter = document.getElementById("typewriter");
+
+    function type() {
+      if (j < messages[i].length) {
+        typewriter.innerHTML += messages[i].charAt(j);
+        j++;
+        setTimeout(type, speed);
+      } else {
+        j = 0;
+        i++;
+        if (i < messages.length) {
+          setTimeout(() => { typewriter.innerHTML = ""; type(); }, 1200);
+        } else {
+          setTimeout(() => {
+            launchConfetti(); // 🎉 trigger confetti when intro ends
+            document.getElementById("intro").style.display = "none";
+            document.getElementById("mainContent").classList.remove("hidden");
+          }, 1500);
         }
+      }
+    }
+    type();
 
-        var tree = new Tree(canvas[0], width, height, opts);
-        var seed = tree.seed;
-        var foot = tree.footer;
-        var hold = 1;
+    // Confetti function
+    function launchConfetti() {
+      var duration = 3 * 1000;
+      var end = Date.now() + duration;
 
-        canvas.click(function(e) {
-            playAudio();
-            console.log("Helloworld!");
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0; 
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
-            }
-        }).mousemove(function(e){
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
         });
-        
-        
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
 
-        var seedAnimate = eval(Jscex.compile("async", function () {
-            seed.draw();
-            while (hold) {
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canScale()) {
-                seed.scale(0.95);
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canMove()) {
-                seed.move(0, 2);
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-        }));
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
 
-        var growAnimate = eval(Jscex.compile("async", function () {
-            do {
-    	        tree.grow();
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canGrow());
-        }));
-
-        var flowAnimate = eval(Jscex.compile("async", function () {
-            do {
-    	        tree.flower(2);
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canFlower());
-        }));
-
-        var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
-            while (tree.move("p1", 500, 0)) {
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-            foot.draw();
-            tree.snapshot("p2", 500, 0, 610, 680);
-
-            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
-            $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
-        }));
-
-        var jumpAnimate = eval(Jscex.compile("async", function () {
-            var ctx = tree.ctx;
-            while (true) {
-                tree.ctx.clearRect(0, 0, width, height);
-                tree.jump();
-                foot.draw();
-                $await(Jscex.Async.sleep(25));
-            }
-        }));
-
-        var textAnimate = eval(Jscex.compile("async", function () {
-		    var together = new Date();
-		    together.setFullYear(2002, 25, 12); 			//时间年月日
-		    together.setHours(20);						//小时	
-		    together.setMinutes(0);					//分钟
-		    together.setSeconds(0);					//秒前一位
-		    together.setMilliseconds(2);				//秒第二位
-
-		    $("#code").show().typewriter();
-            $("#clock-box").fadeIn(500);
-            while (true) {
-                timeElapse(together);
-                $await(Jscex.Async.sleep(1000));
-            }
-        }));
-
-        var runAsync = eval(Jscex.compile("async", function () {
-            $await(seedAnimate());
-            $await(growAnimate());
-            $await(flowAnimate());
-            $await(moveAnimate());
-
-            textAnimate().start();
-
-            $await(jumpAnimate());
-        }));
-
-        runAsync().start();
-    })();
-    </script></body></html>
+    // Button celebration
+    function celebrate() {
+      alert('Happy Birthday Rani 🎂💖');
+      // burst confetti from center
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
